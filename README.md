@@ -1,3 +1,4 @@
+
 # DCS Keybinds Manager
 Backup &amp; Import your keybinds even after UUID changes (different USB port/Windows reinstall)
 
@@ -25,7 +26,37 @@ But if you have a lot of devices and a lot of modules (FC3 alone will have 9 mou
 ## The better solution:
 DCS Keybinds Manager is an [AutoHotKey](https://www.autohotkey.com/) script that will perform the above steps in one click. All you need to do is tell it where the backup folder is located. It will scan and list all devices that have keybinds available under a different UUID in the backup.
 Hit Import and it will:
+* automatically backup current keybinds in case something goes wrong.
 * copy `<Device name> {Old UUID}.diff.lua` files from backup folder to `<Device name> {New UUID}.diff.lua`
 * Replace all references to `{Old UUID}` with `{New UUID}` in LUA file content so that modifiers will work
 
 It will also allow you to **Backup current keybinds** to a time stamped zip file for safe keeping, which you can Import at a later time if required, or share with others.
+
+
+# Installation
+1. This script is written for [AutoHotKey](https://www.autohotkey.com/) v1.1, and won't run in the newer v2.0. If you're familiar with AHK, you can convert the script yourself
+2. Download the AHK script file from this repo and save it on your PC
+
+# Usage
+## If you just reinstalled Windows, you will have a fresh DCS Saved Games folder, with no LUA files. To create those files, you need to :
+1. Start DCS
+2. Goto Settings > Controls
+3. Bind one button per device, for all the devices, under just one module (doesn't matter which, just that all devices have to be bound)
+
+## Importing:
+
+1. Run the AHK file on your PC
+2. The default target folder should be `...\Saved Games\DCS.openbeta\Config\Input`
+	>If you need to select a different folder, click on the button and browse. You can change the default Target path in the script if required
+3. Click `Backup "Input" Folder` button & browse to the location of your backup folder. For e.g. `D:\Backup\Input`
+	> This is the folder that contains all the module folders like `A-10C II`, `FA-18C_hornet`, `J-11A`, etc. You can change the default Backup path in the script required
+4. The script should auto scan both Target & Backup folders to figure out matching LUA files based on Device Name
+	> If you have more than one device with the same name, this script won't work and you have to manually import them
+5. Click `Import` to save current binds "just in case" and import all the matching devices from the Backup location
+
+## Backing Up:
+1. Click the Backup button
+2. Select folder save location. By default it will be the specified `Backup "Input" Folder`
+3. By default, the filename will be `DCS_YYYY`-`MM`-`DD`_`HH`-`mm`-`ss`.zip
+	> This time format will let you sort the files alphabetically. You can change it as required in the script
+4. Click the `Save` button

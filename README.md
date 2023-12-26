@@ -11,6 +11,7 @@ E.g.: `UFC {9A230490-1324-11ED-8001-444553540000}.diff.lua`
 
 If you plug the same device into another port, it will get a new UUID. So if the UUID doesn't match, your previous keybinds won't load, and you get the default binds only.
 E.g.: `UFC {9A230490-1324-11ED-8002-444553540000}.diff.lua`
+
 ---
 ## The solution:
 Assuming you have access to the old working keybind files, if you replace the Old UUID with the new UUID in file names, then DCS will load your keybinds.
@@ -23,6 +24,7 @@ Now if you have only a couple of devices and a couple of modules, this is easy e
 	>to search & replace Old UUID with New UUID inside the files
 
 But if you have a lot of devices and a lot of modules (FC3 alone will have 9 moules with separate keybinds for each), even this becomes a tedious process.
+
 ---
 ## The better solution:
 DCS Keybinds Manager is an [AutoHotKey](https://www.autohotkey.com/) script that will perform the above steps in one click. All you need to do is tell it where the backup folder is located. It will scan and list all devices that have keybinds available under a different UUID in the backup.
@@ -37,6 +39,7 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 # Installation
 1. This script is written for [AutoHotKey](https://www.autohotkey.com/) v1.1, and won't run in the newer v2.0. If you're familiar with AHK, you can convert the script yourself to work with v2
 2. Download the AHK script file from this repo and save it somewhere on your PC
+
 ---
 # Usage
 ## If you just reinstalled Windows, you will have a fresh DCS Saved Games folder, with no LUA files. To create those files, you need to :
@@ -46,6 +49,7 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 OR
 Clear the binds for each device under any one module
 4. Click OK to create fresh LUAs with new UUIDs
+
 ---
 ## Importing:
 
@@ -57,6 +61,7 @@ Clear the binds for each device under any one module
 4. The script should auto scan both Target & Backup folders to figure out matching LUA files based on Device Name
 	> If you have more than one device with the same name, this script won't work and you have to manually import them
 5. Click `Import` to save current binds "just in case" and import all the matching devices from the Backup location
+
 ---
 ## Backing Up:
 1. Click the Backup button

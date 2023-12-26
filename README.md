@@ -1,6 +1,7 @@
 
 # DCS Keybinds Manager
-Backup &amp; Import your keybinds even after UUID changes (different USB port/Windows reinstall)
+* Backup &amp; Import your keybinds even after UUID changes (different USB port/Windows reinstall)
+* Share you keybinds with others who have the same device as you
 
 ## The problem:
 Since you can connect multiple joysticks of the same model and use them independently of each other, there needs to be a way to differentiate between them. Windows does this by assigning a random/unique [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) to a device to a USB port. DCS saves keybinds on a per module, per device basis under

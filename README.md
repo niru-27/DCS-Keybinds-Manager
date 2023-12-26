@@ -35,8 +35,8 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 
 
 # Installation
-1. This script is written for [AutoHotKey](https://www.autohotkey.com/) v1.1, and won't run in the newer v2.0. If you're familiar with AHK, you can convert the script yourself
-2. Download the AHK script file from this repo and save it on your PC
+1. This script is written for [AutoHotKey](https://www.autohotkey.com/) v1.1, and won't run in the newer v2.0. If you're familiar with AHK, you can convert the script yourself to work with v2
+2. Download the AHK script file from this repo and save it somewhere on your PC
 
 # Usage
 ## If you just reinstalled Windows, you will have a fresh DCS Saved Games folder, with no LUA files. To create those files, you need to :

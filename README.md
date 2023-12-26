@@ -42,6 +42,9 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 1. Start DCS
 2. Goto Settings > Controls
 3. Bind one button per device, for all the devices, under just one module (doesn't matter which, just that all devices have to be bound)
+OR
+Clear the binds for each device under any one module
+4. Click OK to create fresh LUAs with new UUIDs
 
 ## Importing:
 
@@ -56,7 +59,7 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 
 ## Backing Up:
 1. Click the Backup button
-2. Select folder save location. By default it will be the specified `Backup "Input" Folder`
+2. Select folder save location. By default it will be the parent folder of the specified `Backup "Input" Folder`
 3. By default, the filename will be `DCS_YYYY`-`MM`-`DD`_`HH`-`mm`-`ss`.zip
 	> This time format will let you sort the files alphabetically. You can change it as required in the script
 4. Click the `Save` button

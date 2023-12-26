@@ -64,3 +64,4 @@ Clear the binds for each device under any one module
 3. By default, the filename will be `DCS_YYYY`-`MM`-`DD`_`HH`-`mm`-`ss`.zip
 	> This time format will let you sort the files alphabetically. You can change it as required in the script
 4. Click the `Save` button
+5. You can backup the timestamped ZIP to the cloud, or share with others if they have the same devices as you

@@ -68,4 +68,4 @@ Clear the binds for each device under any one module
 
 
 ## Known issues:
-Clicking the close button leaves the script running, so please close it from system try when you're done
+Clicking the close button leaves the script running, so please press Escape or close it from system try when you're done

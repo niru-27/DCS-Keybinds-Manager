@@ -65,3 +65,7 @@ Clear the binds for each device under any one module
 	> This time format will let you sort the files alphabetically. You can change it as required in the script
 4. Click the `Save` button
 5. You can backup the timestamped ZIP to the cloud, or share with others if they have the same devices as you
+
+
+## Known issues:
+Clicking the close button leaves the script running, so please close it from system try when you're done

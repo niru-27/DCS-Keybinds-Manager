@@ -15,15 +15,15 @@ E.g.: `UFC {9A230490-1324-11ED-8002-444553540000}.diff.lua`
 ---
 ## The solution:
 Assuming you have access to the old working keybind files, if you replace the Old UUID with the new UUID in file names, then DCS will load your keybinds.
-You also need to replace inside the `modifiers.lua` file for each module.
+You also need to replace the UUID inside the `modifiers.lua` file for each module.
 
 Now if you have only a couple of devices and a couple of modules, this is easy enough to do manually using programs like:
-* [Bulk Rename Utility](https://www.bulkrenameutility.co.uk/)'s Renaming From A Text File
+* [Bulk Rename Utility](https://www.bulkrenameutility.co.uk/)'s Renaming From A Text File feature
 	>to change file names
-* [Notepad++](https://notepad-plus-plus.org/)'s Find in Files
+* [Notepad++](https://notepad-plus-plus.org/)'s Find in Files feature
 	>to search & replace Old UUID with New UUID inside the files
 
-But if you have a lot of devices and a lot of modules (FC3 alone will have 9 moules with separate keybinds for each), even this becomes a tedious process.
+But if you have a lot of devices and a lot of modules (FC3 alone will have 9 modules with separate keybinds for each), even this becomes a tedious process.
 
 ---
 ## The better solution:
@@ -38,11 +38,12 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 ---
 # Installation
 1. This script is written for [AutoHotKey](https://www.autohotkey.com/) v1.1, and won't run in the newer v2.0. If you're familiar with AHK, you can convert the script yourself to work with v2
-2. Download the AHK script file from this repo and save it somewhere on your PC
+2. Download the latest release and extract it somewhere on your PC
+3. Run `Niro's DCS Keybinds Manager.ahk`
 
 ---
 # Usage
-## v0.4-beta: should auto detect new UUIDs of connected devices, thank's to evilC's JoystickWrapper library https://github.com/evilC/JoystickWrapper
+## v0.4-beta: should auto detect new UUIDs of connected devices, thanks to evilC's JoystickWrapper library https://github.com/evilC/JoystickWrapper
 
 ---
 
@@ -59,23 +60,24 @@ Clear the binds for each device under any one module
 ---
 ## Importing:
 
-1. Run the AHK file on your PC
+1. Run `Niro's DCS Keybinds Manager.ahk` on your PC
 2. The default target folder should be `...\Saved Games\DCS.openbeta\Config\Input`
 	>If you need to select a different folder, click on the button and browse. You can change the default Target path in the script if required
 3. Click `Backup "Input" Folder` button & browse to the location of your backup folder. For e.g. `D:\Backup\Input`
 	> This is the folder that contains all the module folders like `A-10C II`, `FA-18C_hornet`, `J-11A`, etc. You can change the default Backup path in the script required
 4. The script should auto scan both Target & Backup folders to figure out matching LUA files based on Device Name
 	> If you have more than one device with the same name, this script won't work and you have to manually import them
-5. Click `Import` to save current binds "just in case" and import all the matching devices from the Backup location
+5. Click `Import`. You will be asked to backup current binds "just in case," and then all the matching devices from the Backup location will be imported
+6. Restart DCS
 
 ---
 ## Backing Up:
-1. Click the Backup button
-2. Select folder save location. By default it will be the parent folder of the specified `Backup "Input" Folder`
-3. By default, the filename will be `DCS_YYYY`-`MM`-`DD`_`HH`-`mm`-`ss`.zip
-	> This time format will let you sort the files alphabetically. You can change it as required in the script
-4. Click the `Save` button
-5. You can backup the timestamped ZIP to the cloud, or share with others if they have the same devices as you
+1. Click the `Backup` button
+2. Browse to save location. By default it will be the parent folder of the specified `Backup "Input" Folder`
+3. The default filename will be `DCS_YYYY`-`MM`-`DD`_`HH`-`mm`-`ss`.zip
+	> This time format will let you sort the files alphabetically, so the latest backup will be at the bottom. You can change it as required in the script
+4. Click the `Save` button to generate the backup zip
+5. You can copy the backup ZIP to the cloud for safekeeping, or share with others if they have the same devices as you
 
 ---
 ## Known issues:

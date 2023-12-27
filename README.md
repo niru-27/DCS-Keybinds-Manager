@@ -42,13 +42,19 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 
 ---
 # Usage
-## If you just reinstalled Windows, you will have a fresh DCS Saved Games folder, with no LUA files. To create those files, you need to :
+## v0.4-beta: should auto detect new UUIDs of connected devices, thank's to evilC's JoystickWrapper library https://github.com/evilC/JoystickWrapper
+
+---
+
+## v0.3-beta only:
+If you just reinstalled Windows, you will have a fresh DCS Saved Games folder, with no LUA files. To create those files, you need to :
 1. Start DCS
 2. Goto Settings > Controls
 3. Bind one button per device, for all the devices, under just one module (doesn't matter which, just that all devices have to be bound)
 OR
 Clear the binds for each device under any one module
 4. Click OK to create fresh LUAs with new UUIDs
+
 
 ---
 ## Importing:

@@ -17,7 +17,6 @@ global jw := new JoystickWrapper("JoystickWrapper.dll")
 ;=========================================================
 ;Path to target DCS Saved Games Folder to be MODIFIED
 SGfolder = C:\Users\%A_Username%\Saved Games\DCS.openbeta\Config\Input
-;SGfolder = D:\Saved Games\DCS.openbetaSTOCK\Config\Input
 
 ;=========================================================
 ;Path to BACKUP source folder. Will never be modified

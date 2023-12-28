@@ -39,23 +39,17 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 # Installation
 1. This script is written for [AutoHotKey](https://www.autohotkey.com/) v1.1, and won't run in the newer v2.0. If you're familiar with AHK, you can convert the script yourself to work with v2
 2. Download the latest release and extract it somewhere on your PC
-3. Run `Niro's DCS Keybinds Manager.ahk`
+3. Connect all your peripherals
+4. Run `Niro's DCS Keybinds Manager.ahk`
 
 ---
-# Usage
+# Usage:
 ## v0.4-beta: should auto detect new UUIDs of connected devices, thanks to evilC's JoystickWrapper library https://github.com/evilC/JoystickWrapper
-
----
-
-## v0.3-beta only:
-If you just reinstalled Windows, you will have a fresh DCS Saved Games folder, with no LUA files. To create those files, you need to :
-1. Start DCS
-2. Goto Settings > Controls
-3. Bind one button per device, for all the devices, under just one module (doesn't matter which, just that all devices have to be bound)
-OR
-Clear the binds for each device under any one module
-4. Click OK to create fresh LUAs with new UUIDs
-
+## Setup folder paths
+1. Target Saved Games folder should auto detect for OpenBeta. Select manually if required
+2. Select Backup path where you previously backed up your `Inputs` folder
+3. A list of matching UUIDs should populate, if not hit `Rescan`
+4. If there are no matches, ensure all your devices are connected
 
 ---
 ## Importing:

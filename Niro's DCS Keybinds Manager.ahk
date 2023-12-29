@@ -4,7 +4,7 @@
 ;Download above library and put the DLL and AHK files next to this script
 version=0.6b
 ;Get latest version of this script from: https://github.com/niru-27/DCS-Keybinds-Manager
-;=========================================================
+;==================================================================================================================
 #NoEnv 							; Recommended for performance and compatibility with future AutoHotkey releases.
 SendMode Input					; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.

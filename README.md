@@ -79,3 +79,4 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 ---
 ## Known issues:
 Fixed: ~~Clicking the close button leaves the script running, so please press Escape or close it from system try when you're done~~
+Fixed: ~~If you don't have 7zip or another compression software, Windows explorer was unable to open the backup archive created using Window's own tar.exe utility. Your old archives are perfectly safe.~~

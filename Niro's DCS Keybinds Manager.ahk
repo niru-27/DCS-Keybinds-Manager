@@ -1,8 +1,8 @@
 ;Needs older AHK v1.1
-;Script ver 0.6b
+;Script ver 0.7b
 ;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library https://github.com/evilC/JoystickWrapper
 ;Download above library and put the DLL and AHK files next to this script
-version=0.6b
+version=0.7b
 ;Get latest version of this script from: https://github.com/niru-27/DCS-Keybinds-Manager
 ;==================================================================================================================
 #NoEnv 							; Recommended for performance and compatibility with future AutoHotkey releases.
@@ -448,7 +448,7 @@ Export:
 			if(SaveZIP!="" && SaveZIP!=" ")
 			{
 				SB_SetText("Exporting to " . SaveZIP)
-				RunWait, tar -cf "%SaveZIP%" *,%SGfolder%, Min					;Export/backup current keybinds
+				RunWait, tar -caf "%SaveZIP%" *,%SGfolder%, Min					;Export/backup current keybinds
 				
 				IfExist, %SaveZIP%												;Confirm backup is created
 				{
@@ -501,7 +501,7 @@ AutoExport:
 			if(SaveZIP!="" && SaveZIP!=" ")
 			{
 				SB_SetText("Exporting to " . SaveZIP)
-				RunWait, tar -cf "%SaveZIP%" *,%SGfolder%, Min					;Auto backup current keybinds before importing, just in case
+				RunWait, tar -caf "%SaveZIP%" *,%SGfolder%, Min					;Auto backup current keybinds before importing, just in case
 				
 				IfExist, %SaveZIP%												;Confirm backup is created
 				{

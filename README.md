@@ -47,9 +47,12 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 ## v0.4-beta: should auto detect new UUIDs of connected devices, thanks to evilC's JoystickWrapper library https://github.com/evilC/JoystickWrapper
 ## Setup folder paths
 1. Target Saved Games folder should auto detect for OpenBeta. Select manually if required
+![1](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/bd403b08-f2a4-43ef-9040-2bdb01d3aac0)
 2. Select Backup path where you previously backed up your `Inputs` folder
-3. A list of matching UUIDs should populate, if not hit `Rescan`
-4. If there are no matches, ensure all your devices are connected
+3. Ensure your devices are detected
+4. A list of matching UUIDs should populate, if not hit `Rescan`
+![2](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/8c9eabbc-96af-4970-a792-300ccc84a73f)
+5. If there are no matches, ensure all your devices are connected
 
 ---
 ## Importing:

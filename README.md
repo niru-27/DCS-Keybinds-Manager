@@ -1,4 +1,3 @@
-
 # DCS Keybinds Manager
 * Backup &amp; Import your keybinds even after UUID changes (different USB port/Windows reinstall)
 * Share you keybinds with others who have the same device as you

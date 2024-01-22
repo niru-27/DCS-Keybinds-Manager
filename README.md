@@ -48,8 +48,12 @@ It will also allow you to **Backup current keybinds** to a time stamped zip file
 
 ## Important:
 If the script can't detect connected devices and show it as 0, you need to unblock the DLL files you downloaded with the script
->* You can do it manually by Right Clicking each DLL file > Properties > check Unblock > Apply
->* Or run the Unblock Script as Admin to do it automatically
+> You can do it manually by Right Clicking each DLL file > Properties > check Unblock > Apply
+>  ![unblock1](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/1c1a5480-b9ec-4528-a4d3-7e9c698df0c8)
+>  ![unblock2](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/b3463f37-cca7-4e77-9c9e-a7974528b717)
+>  ![unblock3](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/fb8f3512-70ce-4d98-b545-078366f98f28)
+>  ![unblock4](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/244ce6a2-1d2f-4a5c-817b-acc37121429f)
+
 
 ## Setup folder paths
 1. Target Saved Games folder should auto detect for OpenBeta. You can click on the button to select manually if required, or you can copy paste the path into the textbox

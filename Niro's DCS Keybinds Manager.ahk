@@ -1,10 +1,11 @@
 ;Needs older AHK v1.1
-;Script ver 0.7b
-;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library https://github.com/evilC/JoystickWrapper
+;Script ver 0.82b
+version=0.82b
+;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library
+;https://github.com/evilC/JoystickWrapper
 ;Download above library and put the DLL and AHK files next to this script
-version=0.7b
-;Get latest version of this script from: https://github.com/niru-27/DCS-Keybinds-Manager
-;==================================================================================================================
+;Get latest version from: https://github.com/niru-27/DCS-Keybinds-Manager
+;=========================================================
 #NoEnv 							; Recommended for performance and compatibility with future AutoHotkey releases.
 SendMode Input					; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%		; Ensures a consistent starting directory.
@@ -20,12 +21,15 @@ DEVvalid:=0					;Currently connected devices detected
 ;=========================================================
 ;Path to target DCS Saved Games Folder to be MODIFIED
 SGfolder = C:\Users\%A_Username%\Saved Games\DCS.openbeta\Config\Input
+;SGfolder = E:\Mine\Saved Games\DCS.openbeta\Config\Input
+
 ;=========================================================
 ;Path to BACKUP source folder. Will never be modified
 Backup=
-;==================================================================================================================
-;==================================================================================================================
-;==================================================================================================================
+;Backup=E:\test\Input
+;=========================================================
+;=========================================================
+;=========================================================
 
 ;Gui, New,,Niro's DCS Keybinds Manager
 
@@ -33,7 +37,7 @@ Gui, Add, Button, gHelp x438 y10 w35 h35 hwndIcon3,
 GuiButtonIcon(Icon3, "shell32.dll", 155, "s25")
 ;=========================================================
 Gui, Add, Button, gTargetFolder x10 y10 w100 h30 hwndIcon1, Target "Input" Folder
-Gui, Add, Edit, x115 y15 w320 vTarget, %SGfolder%
+Gui, Add, Edit, x115 y15 w320 vTarget gChkPathSG, %SGfolder%
 
 IfExist,%SGfolder%
 {
@@ -46,9 +50,9 @@ Else
 	SGvalid:=0
 }
 ;=========================================================
+Gui, Add, Edit,x475 y15 w320 vBk Right gChkPathBk, %Backup%
 Gui, Add, Button, gBackupFolder x800 y10 w100 h30 hwndIcon2, Backup "Input" Folder
 GuiButtonIcon(Icon2, "shell32.dll", 78, "s20 a0 b2")
-Gui, Add, Edit,x475 y15 w320 vBk Right, %Backup%
 
 IfExist,%Backup%
 {
@@ -209,7 +213,7 @@ Rescan:
 				}
 			}
 		}
-		SB_SetText("Searching..." . i . " devices found across " . k . " modules")
+		SB_SetText("Searching..." . i . " devices found in " . k . " modules")
 		Sleep, 20
 	}
 	;MsgBox,	%k% modules found:`n`n%modules%
@@ -247,7 +251,7 @@ Rescan:
 		return
 	}else
 	{
-		SB_SetText(i . " devices found across " . k . " modules. Ready to import")
+		SB_SetText("Backup found for " . i . " devices in " . k . " modules. Ready to import")
 	}
 
 	If(devices!="" && 0)
@@ -257,7 +261,6 @@ return
 
 GuiClose:
 Esc::ExitApp
-
 ;==================================================================================================================
 ;==================================================================================================================
 ;==================================================================================================================
@@ -297,7 +300,7 @@ Import:
 	{
 		curr_mod:=A_LoopFileName
 		k:=k+1
-		SB_SetText("Importing... `t" . curr_mod)
+		SB_SetText("Importing... " . curr_mod)
 		
 		Loop, %Backup%\%curr_mod%\joystick\*.diff.lua					;Loop through each device in current module
 		{
@@ -383,7 +386,7 @@ TargetFolder:
 			SGfolder:=SG2
 			GuiButtonIcon(Icon1, "shell32.dll", 297, "s20 a0 t4")
 			
-			Goto Rescan
+			;Goto Rescan
 		}
 		Else
 		{
@@ -408,12 +411,13 @@ BackupFolder:
 			GuiControl,, Bk, %BK2%
 			Backup:=BK2
 			GuiButtonIcon(Icon2, "shell32.dll", 297, "s20 a0 t4")
-			Goto Rescan
+			
+			;Goto Rescan
 		}
 		Else
 		{
 			BackupValid:=0
-			GuiButtonIcon(Icon1, "shell32.dll", 78, "s20 a0 t4")
+			GuiButtonIcon(Icon2, "shell32.dll", 78, "s20 a0 t4")
 		}		
 	}
 	else SB_SetText("Set Backup location first")
@@ -550,6 +554,9 @@ Help:
 	Gui, Add, Text, x12 y240, 3) Ensure all your devices are connected to your PC to detect their current UUID
 	Gui, Font, s13 w400, Consolas
 	Gui, Add, Text, x12 y275, Only devices with the same name can be matched and imported
+	Gui, Add, Text, x12 y300, If no devices are detected, unblock all the DLL files manually
+	Gui, Add, Text, x12 y320, Right click > Properties > Unblock
+	Gui, Add, Text, x12 y350, Else run the Unblock script as Admin to do it automatically
 
 	Gui, Font, s15 w400, Verdana
 	Gui, Add, Link,, `n`nMore info in repo <a href="https://github.com/niru-27/DCS-Keybinds-Manager">ReadMe</a>
@@ -590,18 +597,27 @@ return
 RefreshDevices:
 	global DeviceList := jw.GetDevices()				;DirectInput devices
 	global XinputDeviceList := jw.GetXInputDevices()	;XInput controllers
+	
+	LV_Delete()
 
 	i:=0						;No. of devices
 	;Joysticks/DirectInput
 	for d, dev in DeviceList
 	{
 		If(!Instr(dev.name,"vJoy"))
+		{
 			i:=i+1
-	}
+			LV_Add("",dev.Name,dev.Guid,"")			
+		}
+	}		
+	
+	;LV_Add(""," VKBsim Gladiator NXT R   ","C5F395E0-950E-11ee-8001-444553540000","")	
+	
 	;XInput : Xbox controllers should work, but untested
 	for d, dev in XinputDeviceList
 	{
 		i:=i+1
+		LV_Add("",dev.Name,dev.Guid,"")	
 	}
 	;=========================================================
 	;MsgBox,	%i%
@@ -625,6 +641,8 @@ RefreshDevices:
 
 		DEVvalid:=0
 	}
+	
+	LV_ModifyCol(1,"Sort Text")					;Sort list alphabetically
 return
 ;==================================================================================================================
 ;==================================================================================================================
@@ -651,6 +669,60 @@ GuiButtonIcon(Handle, File, Index := 1, Options := "")
 	SendMessage, BCM_SETIMAGELIST := 5634, 0, &button_il,, AHK_ID %Handle%
 	return IL_Add( normal_il, File, Index )
 }
+;==================================================================================================================
+;==================================================================================================================
+;==================================================================================================================
+ChkPathSG:
+	Gui Submit, NoHide
+	
+	IfExist,%Target%					;Validate selected Target SG path
+	{
+		SGvalid:=1
+		;GuiControl,, Target, %SG2%
+		SGfolder:=Target
+		GuiButtonIcon(Icon1, "shell32.dll", 297, "s20 a0 t4")
+		
+		if BackupValid
+			SB_SetText("Press Rescan to search for matching keybinds")
+		else
+			SB_SetText("Target location valid. Set Backup location")
+	}
+	Else
+	{
+		SGvalid:=0
+		GuiButtonIcon(Icon1, "shell32.dll", 78, "s20 a0 t4")
+		SB_SetText("Target location not valid")
+	}
+return
+;==================================================================================================================
+;==================================================================================================================
+;==================================================================================================================
+ChkPathBk:
+	Gui Submit, NoHide
+	
+	IfExist,%Bk%					;Validate selected Target SG path
+	{
+		BackupValid:=1
+		;GuiControl,, Target, %SG2%
+		Backup:=Bk
+		GuiButtonIcon(Icon2, "shell32.dll", 297, "s20 a0 t4")
+		
+		if SGvalid
+			SB_SetText("Press Rescan to search for matching keybinds")
+		else
+			SB_SetText("Backup location valid. Set Target location")
+	}
+	Else
+	{
+		BackupValid:=0
+		GuiButtonIcon(Icon2, "shell32.dll", 78, "s20 a0 t4")
+		SB_SetText("Backup location not valid")
+	}
+return
+
+;==================================================================================================================
+;==================================================================================================================
+;==================================================================================================================
 ;==================================================================================================================
 ;==================================================================================================================
 ;==================================================================================================================

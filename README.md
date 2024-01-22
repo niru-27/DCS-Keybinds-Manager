@@ -57,8 +57,11 @@ If the script can't detect connected devices and show it as 0, you need to unblo
 
 ## Setup folder paths
 1. Target Saved Games folder should auto detect for OpenBeta. You can click on the button to select manually if required, or you can copy paste the path into the textbox
-![1](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/bd403b08-f2a4-43ef-9040-2bdb01d3aac0)
-2. Select Backup path where you previously backed up your `Inputs` folder
+>  ![1](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/bd403b08-f2a4-43ef-9040-2bdb01d3aac0)
+![PathTarget](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/01e7fa60-1514-4015-a618-7b67a964a95d)
+
+2. Select Backup path where you previously backed up your `Input` folder
+>  ![PathBK](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/5f3908c4-de26-4a28-bfa6-2f46c5cd04ea)
 3. Ensure your devices are detected
 4. A list of matching UUIDs should populate, if not hit `Rescan`
 ![2](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/8c9eabbc-96af-4970-a792-300ccc84a73f)

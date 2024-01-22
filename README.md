@@ -100,4 +100,5 @@ Investigating: VKB devices may not appear in the list, but are imported neverthe
 Todo: Confirm XBox controller UUID is detected properly
 
 Fixed: ~~Clicking the close button leaves the script running, so please press Escape or close it from system try when you're done~~
+
 Fixed: ~~If you don't have 7zip or another compression software, Windows explorer was unable to open the backup archive created using Window's own tar.exe utility. Your old archives are perfectly safe.~~

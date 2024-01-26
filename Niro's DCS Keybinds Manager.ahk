@@ -1,6 +1,5 @@
 ;Needs older AHK v1.1
-;Script ver 0.82b
-version=0.82b
+version=0.9b
 ;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library
 ;https://github.com/evilC/JoystickWrapper
 ;Download above library and put the DLL and AHK files next to this script
@@ -109,6 +108,8 @@ return
 ;==================================================================================================================
 ;Rescan Button
 Rescan:
+	Gosub RefreshDevices		;Check new devices
+	
 	If(!BackupValid)			;Validate Backup path
 	{
 		SB_SetText("Set Backup location")
@@ -135,11 +136,10 @@ Rescan:
 	;=========================================================
 	If(!DEVvalid)				;Validate devices are connected
 	{
-		SB_SetText("Connect your devices to detect their current UUID")
+		SB_SetText("Connect your devices to detect their current UUID. Make sure DLL files are unblocked to enable detection")
 		return
 	}
 
-	Gosub RefreshDevices		;Check new devices
 
 	SB_SetText("Searching...")
 	Sleep,1000
@@ -167,25 +167,33 @@ Rescan:
 			RegexMatch(A_LoopFileName,"O)(.*) (\{.*\})",Match)
 			old_name := % Match[1]
 			old_UUID := % Match[2]
-			;MsgBox,	%curr_mod%`n%old_name%`n%old_UUID%
+			;MsgBox,	%curr_mod%`n>%old_name%<`n%old_UUID%
+			
+			If(InStr(old_name,"VKBsim") && !InStr(old_name," VKBsim"))					;Handle missing leading space
+			{
+				old_name:=" " . old_name
+			}
 			
 			;Joysticks/DirectInput
 			for d, dev in DeviceList
 			{
 				new_name:=dev.Name
 				new_UUID:=dev.Guid
+				;StringUpper, new_UUID, new_UUID
 				new_UUID={%new_UUID%}
 				if(old_name = new_name)
 				{
 					If(!Instr(devices,old_name) && !Instr(old_name,"vJoy"))
 					{
-						devices=%devices%%old_name%`n
+						devices=%devices%>%old_name%<`n
 						;Store new and old UUID as key-value pair
 						repl[old_UUID] := new_UUID
 						i:=i+1
+						
+						;old_name=>%old_name%<
 						LV_Add("",old_name,new_UUID,old_UUID)
 						SB_SetText("Searching..." . i . " devices found in " . k . " modules")
-						;MsgBox,	%old_name%`n%old_UUID%`n%new_UUID%
+						;MsgBox,Match found:`n`n%old_name%`n%new_UUID%`n%old_UUID%
 						Sleep, 20
 					}
 				}
@@ -201,7 +209,7 @@ Rescan:
 				{
 					If(!Instr(devices,old_name) && !Instr(old_name,"vJoy"))
 					{
-						devices=%devices%%old_name%`n
+						devices=%devices%>%old_name%<`n
 						;Store new and old UUID as key-value pair
 						repl[old_UUID] := new_UUID
 						i:=i+1
@@ -259,8 +267,13 @@ Rescan:
 
 return
 
+;=========================================================
+#IfWinActive, Niro's DCS Keybinds Manager - v0.83b ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe
 GuiClose:
 Esc::ExitApp
+#IfWinActive
+;=========================================================
+;=========================================================
 ;==================================================================================================================
 ;==================================================================================================================
 ;==================================================================================================================
@@ -337,7 +350,7 @@ Import:
 	}	
 
 	j:=j-1
-	SB_SetText("`t>> Replacing UUID inside files, please wait <<")
+	SB_SetText("`t>> Replacing UUID inside files, please wait ... <<")
 
 	;=========================================================
 	;=========================================================
@@ -428,14 +441,7 @@ return
 ;==================================================================================================================
 ;Export button
 Export:
-	If(!BackupValid)			;Validate Backup path
-	{
-		SB_SetText("Set Backup location")
-		return
-	}
 	
-	IfExist, %SGfolder%
-	{
 		ii:=0
 		Loop,Files,%SGfolder%\*,FD					;Ensure Target Input folder is not empty
 			ii:=ii+1
@@ -473,8 +479,6 @@ Export:
 			MsgBox,48,Error, Nothing to export. Target folder is empty`n`n%SGfolder%
 			Sleep, 1000
 		}
-		
-	}
 return
 ;==================================================================================================================
 ;==================================================================================================================
@@ -554,9 +558,9 @@ Help:
 	Gui, Add, Text, x12 y240, 3) Ensure all your devices are connected to your PC to detect their current UUID
 	Gui, Font, s13 w400, Consolas
 	Gui, Add, Text, x12 y275, Only devices with the same name can be matched and imported
-	Gui, Add, Text, x12 y300, If no devices are detected, unblock all the DLL files manually
-	Gui, Add, Text, x12 y320, Right click > Properties > Unblock
-	Gui, Add, Text, x12 y350, Else run the Unblock script as Admin to do it automatically
+	Gui, Add, Text, x12 y300, If no devices are detected, unblock all 4 DLL files manually
+	Gui, Add, Text, x12 y320, Right click > Properties > Unblock > Apply > OK
+	;Gui, Add, Text, x12 y350, Else run the Unblock script as Admin to do it automatically
 
 	Gui, Font, s15 w400, Verdana
 	Gui, Add, Link,, `n`nMore info in repo <a href="https://github.com/niru-27/DCS-Keybinds-Manager">ReadMe</a>

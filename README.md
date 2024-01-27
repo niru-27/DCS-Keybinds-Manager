@@ -35,7 +35,7 @@ Hit Import and it will:
 
 It will also allow you to **Backup current keybinds** to a time stamped zip file for safe keeping, which you can Import at a later time if required, or share with others.
 
-![screenshot_20240127135035](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/92dd5394-d3c1-4a6b-999c-d736ea696f09)
+![screenshot_20240127140212](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/bf54c410-e50f-45cb-873e-a0b6bbc587d0)
 
 ---
 # Installation

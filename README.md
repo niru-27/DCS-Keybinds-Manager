@@ -35,6 +35,8 @@ Hit Import and it will:
 
 It will also allow you to **Backup current keybinds** to a time stamped zip file for safe keeping, which you can Import at a later time if required, or share with others.
 
+![screenshot_20240127135035](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/92dd5394-d3c1-4a6b-999c-d736ea696f09)
+
 ---
 # Installation
 1. This script is written for [AutoHotKey](https://www.autohotkey.com/) v1.1, and won't run in the newer v2.0. If you're familiar with AHK, you can convert the script yourself to work with v2

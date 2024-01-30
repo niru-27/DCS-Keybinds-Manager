@@ -1,5 +1,5 @@
 ;Needs older AHK v1.1
-version=0.9b
+version=0.91b
 ;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library
 ;https://github.com/evilC/JoystickWrapper
 ;Download above library and put the DLL and AHK files next to this script
@@ -268,7 +268,7 @@ Rescan:
 return
 
 ;=========================================================
-#IfWinActive, Niro's DCS Keybinds Manager - v0.83b ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe
+#IfWinActive, Niro's DCS Keybinds Manager - v ahk_class AutoHotkeyGUI ahk_exe AutoHotkey.exe
 GuiClose:
 Esc::ExitApp
 #IfWinActive

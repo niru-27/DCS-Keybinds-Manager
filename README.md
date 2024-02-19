@@ -35,12 +35,10 @@ Hit Import and it will:
 
 It will also allow you to **Backup current keybinds** to a time stamped zip file for safe keeping, which you can Import at a later time if required, or share with others.
 
-![screenshot_20240127140212](https://github.com/niru-27/DCS-Keybinds-Manager/assets/41210892/bf54c410-e50f-45cb-873e-a0b6bbc587d0)
-
 ---
 # Installation
 1. This script is written for [AutoHotKey](https://www.autohotkey.com/) v1.1, and won't run in the newer v2.0. If you're familiar with AHK, you can convert the script yourself to work with v2
-2. Download the latest release of this scipt from [here](https://github.com/niru-27/DCS-Keybinds-Manager/releases/latest) and extract it somewhere on your PC
+2. Download the latest release of this script from [here](https://github.com/niru-27/DCS-Keybinds-Manager/releases/latest) and extract it somewhere on your PC
 3. Connect all your peripherals
 4. Run `Niro's DCS Keybinds Manager.ahk`
 5. If your connected devices are not detected, you need to unblock the included DLL files as Windows blocks downloaded files by default on some systems. This needs to be done only once. See below 
@@ -129,6 +127,6 @@ This wouldn't be possible without their help :)
 
 ---
 ## Donations:
-I'm not really setup to receive international donations, and I wrote this script to primarily for my own needs.
+I'm not really setup to receive international donations, and I wrote this script primarily for my own needs.
 
-If you're feeling generous, please donate to your local animal shelter or volunteer there:)
+If you're feeling generous, please donate to your local animal shelter or volunteer there  :)

@@ -1,5 +1,5 @@
 ;Needs older AHK v1.1
-version=0.91b
+version=0.92b
 ;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library
 ;https://github.com/evilC/JoystickWrapper
 ;Download above library and put the DLL and AHK files next to this script
@@ -20,7 +20,7 @@ DEVvalid:=0					;Currently connected devices detected
 ;=========================================================
 ;Path to target DCS Saved Games Folder to be MODIFIED
 SGfolder = C:\Users\%A_Username%\Saved Games\DCS.openbeta\Config\Input
-;SGfolder = E:\Mine\Saved Games\DCS.openbeta\Config\Input
+SGfolder = E:\Mine\Saved Games\DCS.openbeta\Config\Input
 
 ;=========================================================
 ;Path to BACKUP source folder. Will never be modified
@@ -179,13 +179,23 @@ Rescan:
 			{
 				new_name:=dev.Name
 				new_UUID:=dev.Guid
-				;StringUpper, new_UUID, new_UUID
+				StringUpper, new_UUID, new_UUID
 				new_UUID={%new_UUID%}
+				
+				;Convert part of UUID to lower case, because "ED"
+				;While joystick binds seem unaffected, modifiers are not recognized
+				RegexMatch(new_UUID,"O)(\{.*-.*-)(.*)(-.*-.*\})",Match2)
+				mod:=% Match2[2]
+				StringLower,mod,mod
+				new_UUID:=% Match2[1] . mod . Match2[3]		;Rebuild new_UUID
+				;MsgBox,%new_UUID%
+						
 				if(old_name = new_name)
 				{
 					If(!Instr(devices,old_name) && !Instr(old_name,"vJoy"))
 					{
 						devices=%devices%>%old_name%<`n
+						
 						;Store new and old UUID as key-value pair
 						repl[old_UUID] := new_UUID
 						i:=i+1
@@ -204,6 +214,7 @@ Rescan:
 			{
 				new_name:=dev.Name
 				new_UUID:=dev.Guid
+				StringUpper, new_UUID, new_UUID
 				new_UUID={%new_UUID%}
 				if(old_name = new_name)
 				{
@@ -443,8 +454,11 @@ return
 Export:
 	
 		ii:=0
-		Loop,Files,%SGfolder%\*,FD					;Ensure Target Input folder is not empty
+		Loop,Files,%SGfolder%\*,D					;Ensure Target Input folder is not empty
+		{
 			ii:=ii+1
+			;MsgBox,	%A_LoopFileName%
+		}
 		;MsgBox, %ii%`n`n%SGfolder%
 		
 		if(ii>0)
@@ -493,7 +507,7 @@ AutoExport:
 	IfExist, %SGfolder%
 	{
 		ii:=0
-		Loop,Files,%SGfolder%\*,FD					;Ensure Target Input folder is not empty
+		Loop,Files,%SGfolder%\*,D					;Ensure Target Input folder is not empty
 			ii:=ii+1
 		;MsgBox, %ii%`n`n%SGfolder%
 		;MsgBox, Nothing to export. Folder is empty`n`n%SGfolder%
@@ -611,7 +625,9 @@ RefreshDevices:
 		If(!Instr(dev.name,"vJoy"))
 		{
 			i:=i+1
-			LV_Add("",dev.Name,dev.Guid,"")			
+			new_UUID:=dev.Guid
+			StringUpper, new_UUID, new_UUID
+			LV_Add("",dev.Name,new_UUID,"")			
 		}
 	}		
 	
@@ -621,7 +637,9 @@ RefreshDevices:
 	for d, dev in XinputDeviceList
 	{
 		i:=i+1
-		LV_Add("",dev.Name,dev.Guid,"")	
+		new_UUID:=dev.Guid
+		StringUpper, new_UUID, new_UUID
+		LV_Add("",dev.Name,new_UUID,"")	
 	}
 	;=========================================================
 	;MsgBox,	%i%

@@ -20,7 +20,7 @@ DEVvalid:=0					;Currently connected devices detected
 ;=========================================================
 ;Path to target DCS Saved Games Folder to be MODIFIED
 SGfolder = C:\Users\%A_Username%\Saved Games\DCS.openbeta\Config\Input
-SGfolder = E:\Mine\Saved Games\DCS.openbeta\Config\Input
+;SGfolder = E:\Mine\Saved Games\DCS.openbeta\Config\Input
 
 ;=========================================================
 ;Path to BACKUP source folder. Will never be modified

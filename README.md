@@ -110,6 +110,8 @@ You can do it manually by Right Clicking each DLL file > Properties > check Unbl
 ---
 ## Known issues:
 
+Win 11 only: button icons do not reflect whether the entered paths are valid or not. Refer to the status bar text for their validity
+
 Todo: Confirm XBox controller UUID is detected properly
 
 Fixed: ~~VKB devices may not appear in the list, but are imported nevertheless. Having a leading space in their device name seems to be the culprit. When extracting saved binds, right click the zip and select Extract to ____ folder instead of Drag & Drop to avoid problems~~ Files with or without leading space should be handled correctly now. Weird that VKB chose to add extra spaces in their device names, which causes problems with simple copy-paste within Windows

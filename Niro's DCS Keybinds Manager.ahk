@@ -1,5 +1,5 @@
 ;Needs older AHK v1.1
-version=0.92b
+version=0.95b
 ;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library
 ;https://github.com/evilC/JoystickWrapper
 ;Download above library and put the DLL and AHK files next to this script
@@ -29,6 +29,36 @@ Backup=
 ;=========================================================
 ;=========================================================
 ;=========================================================
+;Set icons depending on Windows 10 or 11
+; Set the registry key path
+RegPath := "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3"
+
+; Read the Settings binary value from the registry
+RegRead, SettingsValue, % RegPath, Settings
+;MsgBox, SettingsValue %SettingsValue%
+; Extract the 9th byte from the binary value
+NinthByte := SubStr(SettingsValue, 17, 1)
+;MsgBox, NinthByte %NinthByte%
+; Check if the 9th byte indicates auto-hide is enabled (03)
+if (NinthByte = "0")
+{
+	winVersion := 10
+	greentick:=297
+	alert:=78
+}
+else if (NinthByte = "7")
+{
+	winVersion := 11
+	greentick:=301
+	alert:=78
+}
+else
+{
+	winVersion := A_OSVersion
+}
+;=========================================================
+;=========================================================
+;=========================================================
 
 ;Gui, New,,Niro's DCS Keybinds Manager
 
@@ -40,28 +70,28 @@ Gui, Add, Edit, x115 y15 w320 vTarget gChkPathSG, %SGfolder%
 
 IfExist,%SGfolder%
 {
-	GuiButtonIcon(Icon1, "shell32.dll", 297, "s20 a0 t4")
+	GuiButtonIcon(Icon1, "shell32.dll", greentick, "s20 a0 t4")
 	SGvalid:=1
 }
 Else
 {
-	GuiButtonIcon(Icon1, "shell32.dll", 78, "s20 a0 l2 b2")
+	GuiButtonIcon(Icon1, "shell32.dll", alert, "s20 a0 t4")
 	SGvalid:=0
 }
 ;=========================================================
 Gui, Add, Edit,x475 y15 w320 vBk Right gChkPathBk, %Backup%
 Gui, Add, Button, gBackupFolder x800 y10 w100 h30 hwndIcon2, Backup "Input" Folder
-GuiButtonIcon(Icon2, "shell32.dll", 78, "s20 a0 b2")
+;GuiButtonIcon(Icon2, "shell32.dll", 78, "s20 a0 b2")
 
 IfExist,%Backup%
 {
 	BackupValid:=1
 	GuiControl,, Bk, %Backup%
-	GuiButtonIcon(Icon2, "shell32.dll", 297, "s20 a0 t4")
+	GuiButtonIcon(Icon2, "shell32.dll", greentick, "s20 a0 t4")
 }
 Else
 {
-	GuiButtonIcon(Icon2, "shell32.dll", 78, "s20 a0  l2 b2")
+	GuiButtonIcon(Icon2, "shell32.dll", alert, "s20 a0  l2 b2")
 	BackupValid:=0
 }	
 ;=========================================================
@@ -124,14 +154,14 @@ Rescan:
 	;=========================================================
 	If(SGfolder=Backup)
 	{
-		GuiButtonIcon(Icon1, "shell32.dll", 78, "s20 a0 t4")
-		GuiButtonIcon(Icon2, "shell32.dll", 78, "s20 a0 t4")
+		GuiButtonIcon(Icon1, "shell32.dll", alert, "s20 a0 t4")
+		GuiButtonIcon(Icon2, "shell32.dll", alert, "s20 a0 t4")
 		MsgBox,48,Error,Target and Backup paths can't be the same!
 	}
 	else
 	{
-		GuiButtonIcon(Icon1, "shell32.dll", 297, "s20 a0 t4")
-		GuiButtonIcon(Icon2, "shell32.dll", 297, "s20 a0 t4")
+		GuiButtonIcon(Icon1, "shell32.dll", greentick, "s20 a0 t4")
+		GuiButtonIcon(Icon2, "shell32.dll", greentick, "s20 a0 t4")
 	}
 	;=========================================================
 	If(!DEVvalid)				;Validate devices are connected
@@ -408,14 +438,14 @@ TargetFolder:
 			SGvalid:=1
 			GuiControl,, Target, %SG2%
 			SGfolder:=SG2
-			GuiButtonIcon(Icon1, "shell32.dll", 297, "s20 a0 t4")
+			GuiButtonIcon(Icon1, "shell32.dll", greentick, "s20 a0 t4")
 			
 			;Goto Rescan
 		}
 		Else
 		{
 			SGvalid:=0
-			GuiButtonIcon(Icon1, "shell32.dll", 78, "s20 a0 t4")
+			GuiButtonIcon(Icon1, "shell32.dll", alert, "s20 a0 t4")
 			SB_SetText("Set Target location first")
 		}
 	}
@@ -434,14 +464,14 @@ BackupFolder:
 			BackupValid:=1
 			GuiControl,, Bk, %BK2%
 			Backup:=BK2
-			GuiButtonIcon(Icon2, "shell32.dll", 297, "s20 a0 t4")
+			GuiButtonIcon(Icon2, "shell32.dll", greentick, "s20 a0 t4")
 			
 			;Goto Rescan
 		}
 		Else
 		{
 			BackupValid:=0
-			GuiButtonIcon(Icon2, "shell32.dll", 78, "s20 a0 t4")
+			GuiButtonIcon(Icon2, "shell32.dll", alert, "s20 a0 t4")
 		}		
 	}
 	else SB_SetText("Set Backup location first")
@@ -702,7 +732,7 @@ ChkPathSG:
 		SGvalid:=1
 		;GuiControl,, Target, %SG2%
 		SGfolder:=Target
-		GuiButtonIcon(Icon1, "shell32.dll", 297, "s20 a0 t4")
+		GuiButtonIcon(Icon1, "shell32.dll", greentick, "s20 a0 t4")
 		
 		if BackupValid
 			SB_SetText("Press Rescan to search for matching keybinds")
@@ -712,7 +742,7 @@ ChkPathSG:
 	Else
 	{
 		SGvalid:=0
-		GuiButtonIcon(Icon1, "shell32.dll", 78, "s20 a0 t4")
+		GuiButtonIcon(Icon1, "shell32.dll", alert, "s20 a0 t4")
 		SB_SetText("Target location not valid")
 	}
 return
@@ -727,7 +757,7 @@ ChkPathBk:
 		BackupValid:=1
 		;GuiControl,, Target, %SG2%
 		Backup:=Bk
-		GuiButtonIcon(Icon2, "shell32.dll", 297, "s20 a0 t4")
+		GuiButtonIcon(Icon2, "shell32.dll", greentick, "s20 a0 t4")
 		
 		if SGvalid
 			SB_SetText("Press Rescan to search for matching keybinds")
@@ -737,7 +767,7 @@ ChkPathBk:
 	Else
 	{
 		BackupValid:=0
-		GuiButtonIcon(Icon2, "shell32.dll", 78, "s20 a0 t4")
+		GuiButtonIcon(Icon2, "shell32.dll", alert, "s20 a0 t4")
 		SB_SetText("Backup location not valid")
 	}
 return

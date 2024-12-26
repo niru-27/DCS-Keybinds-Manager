@@ -1,5 +1,5 @@
 ;Needs older AHK v1.1
-version=0.95b
+version=0.96b
 ;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library
 ;https://github.com/evilC/JoystickWrapper
 ;Download above library and put the DLL and AHK files next to this script
@@ -183,7 +183,6 @@ Rescan:
 	;=========================================================
 	;Get current device UUID using JoystickWrapper
 	DeviceList := jw.GetDevices()				;DirectInput devices
-	XinputDeviceList := jw.GetXInputDevices()	;XInput controllers
 
 	Loop, %Backup%\*,2									;Loop through each module
 	{
@@ -237,30 +236,7 @@ Rescan:
 						Sleep, 20
 					}
 				}
-			}
-			
-			;XInput : Xbox controllers should work, but untested
-			for d, dev in XinputDeviceList
-			{
-				new_name:=dev.Name
-				new_UUID:=dev.Guid
-				StringUpper, new_UUID, new_UUID
-				new_UUID={%new_UUID%}
-				if(old_name = new_name)
-				{
-					If(!Instr(devices,old_name) && !Instr(old_name,"vJoy"))
-					{
-						devices=%devices%>%old_name%<`n
-						;Store new and old UUID as key-value pair
-						repl[old_UUID] := new_UUID
-						i:=i+1
-						LV_Add("",old_name,new_UUID,old_UUID)
-						SB_SetText("Searching..." . i . " devices found in " . k . " modules")
-						;MsgBox,	%old_name%`n%old_UUID%`n%new_UUID%
-						Sleep, 20
-					}
-				}
-			}
+			}			
 		}
 		SB_SetText("Searching..." . i . " devices found in " . k . " modules")
 		Sleep, 20
@@ -644,7 +620,6 @@ return
 ;Get current device UUID using JoystickWrapper
 RefreshDevices:
 	global DeviceList := jw.GetDevices()				;DirectInput devices
-	global XinputDeviceList := jw.GetXInputDevices()	;XInput controllers
 	
 	LV_Delete()
 
@@ -659,17 +634,6 @@ RefreshDevices:
 			StringUpper, new_UUID, new_UUID
 			LV_Add("",dev.Name,new_UUID,"")			
 		}
-	}		
-	
-	;LV_Add(""," VKBsim Gladiator NXT R   ","C5F395E0-950E-11ee-8001-444553540000","")	
-	
-	;XInput : Xbox controllers should work, but untested
-	for d, dev in XinputDeviceList
-	{
-		i:=i+1
-		new_UUID:=dev.Guid
-		StringUpper, new_UUID, new_UUID
-		LV_Add("",dev.Name,new_UUID,"")	
 	}
 	;=========================================================
 	;MsgBox,	%i%

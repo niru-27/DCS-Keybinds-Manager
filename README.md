@@ -111,7 +111,7 @@ You can do it manually by Right Clicking each DLL file > Properties > check Unbl
 ## Known issues:
 
 
-Todo: Confirm XBox controller UUID is detected properly
+Fixed: ~~Confirm XBox controller UUID is detected properly~~
 
 Fixed: ~~Win 11 only: button icons do not reflect whether the entered paths are valid or not. Refer to the status bar text for their validity~~
 

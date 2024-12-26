@@ -1,5 +1,5 @@
 ;Needs older AHK v1.1
-version=0.96b
+version=1.0
 ;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library
 ;https://github.com/evilC/JoystickWrapper
 ;Download above library and put the DLL and AHK files next to this script

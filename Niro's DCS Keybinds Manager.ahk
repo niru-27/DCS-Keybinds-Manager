@@ -1,5 +1,5 @@
 ;Needs older AHK v1.1
-version=1.0
+version=1.01
 ;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library
 ;https://github.com/evilC/JoystickWrapper
 ;Download above library and put the DLL and AHK files next to this script
@@ -362,7 +362,7 @@ Import:
 		;Copy keyboard, mouse, TrackIR and modifiers binds
 		FileCopyDir, %Backup%\%curr_mod%\keyboard\, %SGfolder%\%curr_mod%\keyboard\, 1
 		FileCopyDir, %Backup%\%curr_mod%\mouse\, %SGfolder%\%curr_mod%\mouse\, 1		
-		FileCopyDir, %Backup%\%curr_mod%\mouse\, %SGfolder%\%curr_mod%\trackir\, 1		
+		FileCopyDir, %Backup%\%curr_mod%\trackir\, %SGfolder%\%curr_mod%\trackir\, 1		
 		FileCopy, %Backup%\%curr_mod%\modifiers.lua, %SGfolder%\%curr_mod%\modifiers.lua, 1	
 	}	
 

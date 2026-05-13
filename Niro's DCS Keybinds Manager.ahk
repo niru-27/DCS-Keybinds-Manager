@@ -1,5 +1,5 @@
 ;Needs older AHK v1.1
-version=1.01
+version=1.02
 ;No need to manually create LUAs via DCS. Should auto detect UUIDs thanks to evilC's JoystickWrapper library
 ;https://github.com/evilC/JoystickWrapper
 ;Download above library and put the DLL and AHK files next to this script
@@ -210,6 +210,10 @@ Rescan:
 				new_UUID:=dev.Guid
 				StringUpper, new_UUID, new_UUID
 				new_UUID={%new_UUID%}
+			
+				;Handle slash in Device Name
+				new_name:=StrReplace(new_name,"/","_")
+				new_name:=StrReplace(new_name,"\","_")
 				
 				;Convert part of UUID to lower case, because "ED"
 				;While joystick binds seem unaffected, modifiers are not recognized
